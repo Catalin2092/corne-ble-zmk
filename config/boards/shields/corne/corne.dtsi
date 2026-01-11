@@ -57,47 +57,51 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
 //Power/Rest Btn
 
 / {
-    gpios {
-        compatible = "gpio-leds";
-        
-        led1_ctrl: led1_ctrl {
-            gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>; //D8
-            label = "LED1_BTN_CONTROL";
-        };
-    };
-    
     behaviors {
-        // Turn off both LEDs after 2 minutes
-        leds_timeout_off: leds_timeout_off {
-            compatible = "zmk,behavior-triggered-macro";
+        // Define LED control behaviors
+        set_gpio: set_gpio {
+            compatible = "zmk,behavior-gpio-direct";
+            #binding-cells = <2>;
+        };
+        
+        // Timeout: Set GPIO pins LOW
+        leds_off_2min: leds_off_2min {
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            trigger = <&timeout_trigger>;
             bindings = <
-                &gpio_led_off 0 8  // LED1 off
+                &set_gpio 8 0  // D8 LOW
             >;
         };
         
-        // Turn on LEDs with any key press
-        leds_wake_on: leds_wake_on {
-            compatible = "zmk,behavior-triggered-macro";
+        // Wake: Set GPIO pins HIGH  
+        leds_on_wake: leds_on_wake {
+            compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            trigger = <&activity_trigger>;
             bindings = <
-                &gpio_led_on 0 8   // LED1 on
+                &set_gpio 8 1  // D8 HIGH
             >;
         };
     };
     
     triggers {
-        timeout_trigger: timeout_trigger {
+        led_timeout: led_timeout {
             compatible = "zmk,activity-trigger";
             activity = "idle";
-            timeout-ms = <120000>; // 2 minutes
+            timeout-ms = <120000>;
         };
+    };
+    
+    // Connect triggers to behaviors trigger when idle for 2 min
+    activity_sensors {
+        compatible = "zmk,activity-sensors";
+        sensors = <
+            &led_timeout
+        >;
         
-        activity_trigger: activity_trigger {
-            compatible = "zmk,activity-trigger";
-            activity = "all";
+        // Map trigger to behavior
+        led_timeout_to_behavior {
+            trigger = <&led_timeout>;
+            behavior = <&leds_off_2min>;
         };
     };
 };
