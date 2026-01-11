@@ -52,7 +52,55 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
                     <&pro_micro 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>, 
                     <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; 
     }; 
-}; 
+};
+
+//Power/Rest Btn
+
+/ {
+    gpios {
+        compatible = "gpio-leds";
+        
+        led1_ctrl: led1_ctrl {
+            gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>; //D8
+            label = "LED1_BTN_CONTROL";
+        };
+    };
+    
+    behaviors {
+        // Turn off both LEDs after 2 minutes
+        leds_timeout_off: leds_timeout_off {
+            compatible = "zmk,behavior-triggered-macro";
+            #binding-cells = <0>;
+            trigger = <&timeout_trigger>;
+            bindings = <
+                &gpio_led_off 0 8  // LED1 off
+            >;
+        };
+        
+        // Turn on LEDs with any key press
+        leds_wake_on: leds_wake_on {
+            compatible = "zmk,behavior-triggered-macro";
+            #binding-cells = <0>;
+            trigger = <&activity_trigger>;
+            bindings = <
+                &gpio_led_on 0 8   // LED1 on
+            >;
+        };
+    };
+    
+    triggers {
+        timeout_trigger: timeout_trigger {
+            compatible = "zmk,activity-trigger";
+            activity = "idle";
+            timeout-ms = <120000>; // 2 minutes
+        };
+        
+        activity_trigger: activity_trigger {
+            compatible = "zmk,activity-trigger";
+            activity = "all";
+        };
+    };
+};
 
 &pro_micro_i2c { 
     status = "okay"; 
