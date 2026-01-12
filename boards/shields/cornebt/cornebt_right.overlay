@@ -1,4 +1,4 @@
-#include "corne.dtsi"
+#include "cornebt.dtsi"
 
 &default_transform {
     col-offset = <6>;
