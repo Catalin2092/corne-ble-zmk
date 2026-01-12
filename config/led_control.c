@@ -7,7 +7,7 @@
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-#define LED_NODE DT_NODELABEL(led_gpio_control)
+#define LED_NODE DT_NODELABEL(led_0)
 
 #if DT_NODE_EXISTS(LED_NODE)
 
