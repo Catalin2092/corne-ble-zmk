@@ -1,4 +1,8 @@
+name: corne-ble-config
+
 build:
+  cmake: .
+  kconfig: Kconfig
   settings:
     board_root: .
     snippet_root: .

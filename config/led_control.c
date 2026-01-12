@@ -2,6 +2,7 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/drivers/led.h>
 #include <zmk/events/activity_state_changed.h>
 #include <zmk/activity.h>
 

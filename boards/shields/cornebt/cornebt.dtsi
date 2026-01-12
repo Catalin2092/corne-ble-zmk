@@ -77,9 +77,14 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
 // LED GPIO Control
 / {
     led_gpios {
-        compatible = "gpio-keys";
-        led_gpio_control: led_gpio_0 {
-            gpios = <&pro_micro 8 GPIO_ACTIVE_HIGH>;
+        compatible = "gpio-leds";
+        user_led: led_0  {
+            gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>;
+            label = "User LED";
         };
+    };
+
+        aliases {
+        indicator-led = &user_led;
     };
 };
