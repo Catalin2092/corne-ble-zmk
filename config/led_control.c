@@ -2,60 +2,40 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/logging/log.h>
-#include <zephyr/drivers/led.h>
-#include <zmk/events/activity_state_changed.h>
-#include <zmk/activity.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-// Get GPIO device and pin directly from devicetree
-#define LED_GPIO_NODE DT_NODELABEL(pro_micro)
-#define LED_PIN 8
+// Bind to the indicator-led alias defined in your shield DTS.
+#define LED_NODE DT_ALIAS(indicator_led)
 
-#if DT_NODE_EXISTS(LED_GPIO_NODE)
+#if DT_NODE_HAS_STATUS(LED_NODE, okay)
 
-static const struct device *gpio_dev;
+static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
 static int led_control_init(void) {
-    gpio_dev = DEVICE_DT_GET(LED_GPIO_NODE);
-    
-    if (!device_is_ready(gpio_dev)) {
-        LOG_ERR("LED GPIO device not ready");
+    if (!device_is_ready(led.port)) {
+        LOG_ERR("Indicator LED port not ready");
         return -ENODEV;
     }
 
-    int ret = gpio_pin_configure(gpio_dev, LED_PIN, GPIO_OUTPUT_ACTIVE);
+    int ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
     if (ret < 0) {
-        LOG_ERR("Failed to configure LED GPIO pin");
+        LOG_ERR("Failed to configure indicator LED pin");
         return ret;
     }
 
-    // Turn LED on at boot
-    gpio_pin_set(gpio_dev, LED_PIN, 1);
-    LOG_INF("LED control initialized on pin %d, LED turned on", LED_PIN);
-
-    return 0;
-}
-
-static int led_activity_listener(const zmk_event_t *eh) {
-    enum zmk_activity_state state = zmk_activity_get_state();
-
-    if (state == ZMK_ACTIVITY_IDLE) {
-        // Turn LED off when idle
-        gpio_pin_set(gpio_dev, LED_PIN, 0);
-        LOG_INF("Activity idle - LED turned off");
-    } else if (state == ZMK_ACTIVITY_ACTIVE) {
-        // Turn LED on when active
-        gpio_pin_set(gpio_dev, LED_PIN, 1);
-        LOG_INF("Activity active - LED turned on");
+    ret = gpio_pin_set_dt(&led, 1);
+    if (ret < 0) {
+        LOG_ERR("Failed to turn indicator LED on");
+        return ret;
     }
 
+    LOG_INF("Indicator LED forced on at boot (port %s pin %d)", led.port->name, led.pin);
     return 0;
 }
-
-ZMK_LISTENER(led_control, led_activity_listener);
-ZMK_SUBSCRIPTION(led_control, zmk_activity_state_changed);
 
 SYS_INIT(led_control_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
 
+#else
+#warning "indicator-led alias not found; ZMK_LED_CONTROL is inactive."
 #endif
