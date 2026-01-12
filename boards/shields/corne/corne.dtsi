@@ -54,58 +54,6 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
     }; 
 };
 
-//Power/Rest Btn
-
-/ {
-    behaviors {
-        // Define LED control behaviors
-        set_gpio: set_gpio {
-            compatible = "zmk,behavior-gpio-direct";
-            #binding-cells = <2>;
-        };
-        
-        // Timeout: Set GPIO pins LOW
-        leds_off_2min: leds_off_2min {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <
-                &set_gpio 8 0  // D8 LOW
-            >;
-        };
-        
-        // Wake: Set GPIO pins HIGH  
-        leds_on_wake: leds_on_wake {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <
-                &set_gpio 8 1  // D8 HIGH
-            >;
-        };
-    };
-    
-    triggers {
-        led_timeout: led_timeout {
-            compatible = "zmk,activity-trigger";
-            activity = "idle";
-            timeout-ms = <120000>;
-        };
-    };
-    
-    // Connect triggers to behaviors trigger when idle for 2 min
-    activity_sensors {
-        compatible = "zmk,activity-sensors";
-        sensors = <
-            &led_timeout
-        >;
-        
-        // Map trigger to behavior
-        led_timeout_to_behavior {
-            trigger = <&led_timeout>;
-            behavior = <&leds_off_2min>;
-        };
-    };
-};
-
 &pro_micro_i2c { 
     status = "okay"; 
 
