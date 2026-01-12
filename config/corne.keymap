@@ -21,7 +21,7 @@
                         >;
                 };
 
-                nbs_layer {
+                lower_layer {
                 display-name = "Nbs";
 // -----------------------------------------------------------------------------------------
 // | ALT/ESC |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
@@ -36,7 +36,7 @@
                         >;
                 };
 
-                symb_layer {
+                raise_layer {
                 display-name = "Symb";
 // -----------------------------------------------------------------------------------------
 // | ALT/ESC |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
@@ -54,14 +54,14 @@
                 fns_layer {
                 display-name = "Fns";
 // -----------------------------------------------------------------------------------------
-// |  ESC  |  LY0  |  LY4  |  LY5  | MAC5  |     |   |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |
-// | LCTL  |       | LALT  | MAC1  | MAC2  | MAC0|   |  F7  |  F8  |  F9  | F10  | F11  | F12  |
-// |  DEL  |       |       | MAC3  | MAC4  | MAC5|   | VOLD | VOLU | MUTE | PLAY |      | BSPC |
-//                         | SHFT  |  LY0  | SPC |   | ENT  |  LY0 | ALT/TAB |
+// |  ESC  |  LY0      |  LY4  |  LY5  | MAC5  |     |   |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |
+// | LCTL  |           | LALT  | MAC1  | MAC2  | MAC0|   |  F7  |  F8  |  F9  | F10  | F11  | F12  |
+// |  DEL  |  StUnlock |       | MAC3  | MAC4  | MAC5|   | VOLD | VOLU | MUTE | PLAY |      | BSPC |
+//                             | SHFT  |  LY0  | SPC |   | ENT  |  LY0 | ALT/TAB |
                         bindings = <
    &kp ESC &to 0 &to 4 &mo 5 &none &none   &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6
    &kp LCTRL &none &kp LALT &none &none &none   &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
-   &kp DEL &none &none &none &none &none   &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE &kp C_PP &none &kp BSPC
+   &kp DEL &studio_unlock &none &none &none &none   &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE &kp C_PP &none &kp BSPC
                           &kp LSHFT &to 0 &kp SPACE   &kp RET &to 0 &mt LALT TAB
                         >;
                 };
