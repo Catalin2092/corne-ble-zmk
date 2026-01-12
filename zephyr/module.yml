@@ -1,8 +1,8 @@
 name: corne-ble-config
 
 build:
-  cmake: .
-  kconfig: Kconfig
+  cmake: zephyr
+  kconfig: zephyr/Kconfig
   settings:
     board_root: .
     snippet_root: .
