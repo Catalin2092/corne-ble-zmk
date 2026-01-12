@@ -1,0 +1,8 @@
+config ZMK_LED_CONTROL
+    bool "Enable automatic LED control based on activity"
+    default y
+    help
+      Enable automatic control of external LEDs based on keyboard activity state.
+      LEDs will turn off after idle timeout and turn back on when activity is detected.
+
+source "Kconfig.zephyr"
