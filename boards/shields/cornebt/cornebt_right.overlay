@@ -5,7 +5,7 @@
 };
 
 &kscan0 {
-    col-gpios
+        col-gpios
         = <&pro_micro 14 GPIO_ACTIVE_HIGH>
         , <&pro_micro 15 GPIO_ACTIVE_HIGH>
         , <&pro_micro 18 GPIO_ACTIVE_HIGH>
@@ -15,6 +15,7 @@
         ;
 };
 
-&user_led {
+// Custom LED Control for each side
+&led_steady {
     gpios = <&pro_micro 8 GPIO_ACTIVE_HIGH>;
 };

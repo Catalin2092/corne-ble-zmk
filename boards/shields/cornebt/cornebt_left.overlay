@@ -15,6 +15,7 @@
         ;
 };
 
-&user_led {
+// Custom LED Control for each side
+&led_steady {
     gpios = <&pro_micro 16 GPIO_ACTIVE_HIGH>;
 };
