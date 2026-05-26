@@ -8,37 +8,37 @@ macros {
         phrase_1: phrase_1 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_wait_time 1>; // Valid placeholder data
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 1>;
         };
 
         phrase_2: phrase_2 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_wait_time 1>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 2>;
         };
 
         phrase_3: phrase_3 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_wait_time 1>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 3>;
         };
 
         phrase_4: phrase_4 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_wait_time 1>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 4>;
         };
 
         phrase_5: phrase_5 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_wait_time 1>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 5>;
         };
 
         phrase_6: phrase_6 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_wait_time 1>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 6>;
         };
     };
 
