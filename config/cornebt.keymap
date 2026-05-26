@@ -8,37 +8,37 @@ macros {
         phrase_1: phrase_1 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 1>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp N1>;
         };
 
         phrase_2: phrase_2 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 2>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp N2>;
         };
 
         phrase_3: phrase_3 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 3>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp N3>;
         };
 
         phrase_4: phrase_4 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 4>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp N4>;
         };
 
         phrase_5: phrase_5 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 5>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp N5>;
         };
 
         phrase_6: phrase_6 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&macro_tap &kp COLON &kp P &kp S &kp 6>;
+            bindings = <&macro_tap &kp COLON &kp P &kp S &kp N6>;
         };
     };
 
