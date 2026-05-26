@@ -8,40 +8,39 @@ macros {
         phrase_1: phrase_1 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <>;
+            bindings = <&macro_wait_time 1>; // Valid placeholder data
         };
 
         phrase_2: phrase_2 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <>;
+            bindings = <&macro_wait_time 1>;
         };
 
         phrase_3: phrase_3 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <>;
+            bindings = <&macro_wait_time 1>;
         };
 
         phrase_4: phrase_4 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <>;
+            bindings = <&macro_wait_time 1>;
         };
 
         phrase_5: phrase_5 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <>;
+            bindings = <&macro_wait_time 1>;
         };
 
         phrase_6: phrase_6 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <>;
+            bindings = <&macro_wait_time 1>;
         };
     };
-
 
         keymap {
                 compatible = "zmk,keymap";
